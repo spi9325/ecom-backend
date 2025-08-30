@@ -5,7 +5,7 @@ import { prisma } from "../prismaClient/client";
 
 export const addToCartRouter: Router = Router()
 
-addToCartRouter.post("cart",userMiddleware,async (req:Request,res:Response)=>{
+addToCartRouter.post("/cart",userMiddleware,async (req:Request,res:Response)=>{
     const validInput = addToCartSchema.safeParse(req.body);
     if(!validInput.success){
         res.status(400).send("Provide Vaild Inputs");
