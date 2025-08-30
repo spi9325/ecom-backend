@@ -17,3 +17,17 @@ model User{
 
   @@index([email])
 }
+
+model Cart{
+  id        String  @id  @default(uuid())
+  name  String   @unique
+  price  String 
+  details  String 
+  textcolor  String 
+  color  String 
+  material  String 
+  imageUrl  String 
+  availabel  String
+
+  @@index([name])
+}
