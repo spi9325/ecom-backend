@@ -22,12 +22,7 @@ model Cart{
   id        String  @id  @default(uuid())
   name  String   @unique
   email String
-  price  String 
-  details  String 
-  textcolor  String 
-  color  String 
-  material  String 
-  imageUrl  String 
+  price  String
   availabel  String
 
   @@index([name])
