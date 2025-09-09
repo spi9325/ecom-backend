@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { signupSchema } from "../zodSchemas/schemas";
+import { addToCartSchema, emailSchema, signupSchema } from "../zodSchemas/schemas";
 import { prisma } from "../prismaClient/client";
 
 export async function userMiddleware(req:Request,res:Response,next:NextFunction){
-    const validInput = signupSchema.safeParse(req.body);
+    const validInput = addToCartSchema.safeParse(req.body);
     if(!validInput.success){
         res.status(400).send("provide Valid Data")
         return;
@@ -13,8 +13,7 @@ export async function userMiddleware(req:Request,res:Response,next:NextFunction)
             email:validInput.data?.email!
         }
     })
-    if(userExist){
+   
         req.email = validInput.data.email
         next();
-    }
-}
+   }

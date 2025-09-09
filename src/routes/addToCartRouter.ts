@@ -5,33 +5,38 @@ import { prisma } from "../prismaClient/client";
 
 export const addToCartRouter: Router = Router()
 
-addToCartRouter.post("/cart", userMiddleware, async (req: Request, res: Response) => {
+addToCartRouter.post("/cart",userMiddleware,async (req: Request, res: Response) => {
     try {
         const validInput = addToCartSchema.safeParse(req.body);
         if (!validInput.success) {
-            res.status(400).send("Provide Vaild Inputs");
+            res.status(400).send("Provide Vaild data");
             return;
         }
-        const { name, price, availabel } = validInput.data;
-        const Cart_Alredy_Exist = await prisma.cart.findFirst({
+        const { name, price, image, total, qty } = validInput.data;
+        
+        const Cart_Alredy_Exist = await prisma.cart.findUnique({
             where: {
                 name,
                 email: req.email!
             }
         })
-    
-        if (!Cart_Alredy_Exist) {
+
+        if (Cart_Alredy_Exist === null) {
             const cart = await prisma.cart.create({
                 data: {
                     name,
                     email: req.email!,
-                    price: price.toString(),
-                    availabel
+                    price,
+                    image,
+                    total,
+                    qty
                 }
             })
             if (cart) {
-                res.status(200).send("cart add");
+                res.status(200).send("cart add...");
             }
+        }else{
+               res.status(200).send("cart already exist...");
         }
     } catch (error) {
         console.log(error);
