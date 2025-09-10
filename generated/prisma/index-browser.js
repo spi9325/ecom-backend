@@ -132,7 +132,9 @@ exports.Prisma.CartScalarFieldEnum = {
   name: 'name',
   email: 'email',
   price: 'price',
-  availabel: 'availabel'
+  image: 'image',
+  total: 'total',
+  qty: 'qty'
 };
 
 exports.Prisma.SortOrder = {

@@ -14,16 +14,21 @@ model User{
   email     String   @unique
   password  String?
   image     String?
-
+  carts      Cart[]
   @@index([email])
 }
+
+
 
 model Cart{
   id        String  @id  @default(uuid())
   name  String   @unique
   email String
   price  String
-  availabel  String
+  image String
+  total String
+  qty   String
+  user   User @relation(fields: [email], references: [email])
 
   @@index([name])
 }
