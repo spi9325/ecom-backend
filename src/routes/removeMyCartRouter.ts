@@ -18,3 +18,15 @@ removeMyCartRouter.delete("/cart",user,async (req:Request,res:Response)=>{
         console.log(error);
     }
 })
+removeMyCartRouter.delete("/all",user,async (req:Request,res:Response)=>{
+    try {
+        await prisma.cart.deleteMany({
+            where:{
+                email:req.email!,
+            },
+        })
+        res.status(200).send("all removed...")       
+    } catch (error) {
+        console.log(error);
+    }
+})

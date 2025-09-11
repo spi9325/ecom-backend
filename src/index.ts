@@ -9,6 +9,7 @@ import { getMyCartRouter } from "./routes/getMyCartRouter";
 import { removeMyCartRouter } from "./routes/removeMyCartRouter";
 import cookieParser from "cookie-parser"
 import { quantityRouter } from "./routes/quantityRouter";
+import { orderRouter } from "./routes/orderRouter";
 
 
 
@@ -27,6 +28,7 @@ app.use("/add",addToCartRouter);
 app.use("/get",getMyCartRouter);
 app.use("/remove",removeMyCartRouter);
 app.use("/quantity",quantityRouter);
+app.use("/order",orderRouter);
 
 
 app.listen(process.env.PORT || 8080,()=>console.log(`listning on PORT ${process.env.PORT}`))

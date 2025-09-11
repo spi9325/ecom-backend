@@ -15,10 +15,9 @@ model User{
   password  String?
   image     String?
   carts      Cart[]
+  orders      Order[]   
   @@index([email])
 }
-
-
 
 model Cart{
   id        String  @id  @default(uuid())
@@ -31,4 +30,15 @@ model Cart{
   user   User @relation(fields: [email], references: [email])
 
   @@index([name])
+}
+
+model Order{
+  id        String  @id  @default(uuid())
+  name String 
+  qty String
+  price String
+  total String
+  email String
+  createdAt DateTime @default(now())
+  user  User  @relation(fields: [email], references: [email] )
 }
